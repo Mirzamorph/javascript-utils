@@ -1,11 +1,19 @@
 /**
- * Компактная функция для работы с DOM
+ * A small function to work with DOM
  */
 
-function createRoot(root) {
-    if (!root) {
-        root = document
+function createRoot(rootSelector) {
+
+    let root = document
+    if (rootSelector) {
+        const rootEl = document.querySelector(rootSelector)
+        if (rootEl) {
+            root = rootEl
+        } else {
+            console.warn(`Root selector "${rootSelector}" wasn't found, using Document instead`)
+        }
     }
+
     return {
         node(selector) {
             return root.querySelector(selector)
@@ -15,3 +23,7 @@ function createRoot(root) {
         }
     }
 }
+
+// Usage:
+// const { node, nodes } = createRoot('header')
+// node('nav') <- getting nav from header
