@@ -43,7 +43,5 @@ function cookieSet(key, value, options = {}) {
 }
 
 function cookieRemove(key) {
-    cookieSet(key, '', {
-        'max-age': -1
-    })
+    document.cookie = `${key}="";max-age=-1;expired=${Date.now()}`
 }
